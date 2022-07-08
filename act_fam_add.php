@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Add</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+	<style type="text/css">
+
+		.style3 {color: #FFFFFF}
+      	.on  { background:red; height:100px; width:100px }
+      	.off { background:#57B846; height:100px; width:100px }
+     </style>
+
+	
+</head>
+<body onLoad="myFunction()">
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-form-title" style="background-image: url(images/bg-01.jpg);">
+					<div align="center">
+					  <p class="login100-form-title-1 style3">Map Family </p><p id="demo"></p>
+					  </div>
+				</div>
+					<div>
+					<?php
+			include "dbconnection.php";
+					session_start();
+					$f_id=$_SESSION["family"];
+					$a_id=$_REQUEST['a_id'];
+					//$f_id=$_REQUEST['f_id'];
+				
+					$sql="insert into act_family values('".$a_id."','".$f_id."')";
+					$rs = $conn->query($sql);
+					echo "<p align=center>Add</p>";
+					
+					
+	?>
+					
+					</div>
+				<div><?php header("Location: act_fam_view.php?family=".$f_id); ?></div>
+			</div>
+		</div>
+	</div>
+	
+
+
+</body>
+</html>

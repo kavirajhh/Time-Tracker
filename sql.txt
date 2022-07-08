@@ -1,0 +1,277 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.2.2
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Nov 08, 2020 at 12:22 PM
+-- Server version: 5.5.27
+-- PHP Version: 5.4.7
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `ttrack`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `branch`
+--
+
+CREATE TABLE IF NOT EXISTS `branch` (
+  `BID` varchar(10) NOT NULL DEFAULT '',
+  `BNAME` varchar(25) NOT NULL,
+  PRIMARY KEY (`BID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `branch`
+--
+
+INSERT INTO `branch` (`BID`, `BNAME`) VALUES
+('302', 'ginigathena'),
+('303', 'Nawalapitiya'),
+('350', 'Kandy');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `counter`
+--
+
+CREATE TABLE IF NOT EXISTS `counter` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_ID` varchar(20) NOT NULL,
+  `date_time` datetime NOT NULL,
+  `count` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job`
+--
+
+CREATE TABLE IF NOT EXISTS `job` (
+  `jobID` int(11) NOT NULL AUTO_INCREMENT,
+  `job` varchar(25) NOT NULL,
+  `job_des` varchar(25) NOT NULL,
+  PRIMARY KEY (`jobID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=61 ;
+
+--
+-- Dumping data for table `job`
+--
+
+INSERT INTO `job` (`jobID`, `job`, `job_des`) VALUES
+(1, 'Front Office', '1'),
+(2, 'Email sending ', '1'),
+(3, 'Printing', '1'),
+(4, 'Scanning', '1'),
+(5, 'Office meeting', '1'),
+(6, 'Customer Inquiry', '1'),
+(7, 'Customer calls', '1'),
+(8, 'Internal mail ', '1'),
+(9, 'Call back verification', '1'),
+(10, 'T24', '1'),
+(11, 'SMS system', '1'),
+(12, 'iCard Old', '1'),
+(13, 'iCard New', '1'),
+(14, 'Balance confirmation (Aud', '1'),
+(15, 'Balance confirmation (Vis', '1'),
+(16, 'Risk rating system', '1'),
+(17, 'Clearing system ', '1'),
+(18, 'HCM', '1'),
+(19, 'Western Union', '1'),
+(20, 'Other activities', '1'),
+(21, 'Credit Officer', '2'),
+(22, 'Printing', '2'),
+(23, 'Scanning', '2'),
+(24, 'Customer calls', '2'),
+(25, 'Customer inquiry', '2'),
+(26, 'Customer visits', '2'),
+(27, 'Legal visits', '2'),
+(28, 'Morning clearing', '2'),
+(29, 'Email (inward/outward)', '2'),
+(30, 'Daily excess monitoring', '2'),
+(31, 'Performing SME assets', '2'),
+(32, 'Performing SME liabilitie', '2'),
+(33, 'T24', '2'),
+(34, 'CRIB system', '2'),
+(35, 'Workflow', '2'),
+(36, 'HCM', '2'),
+(37, 'OASYS', '2'),
+(38, 'Other', '2'),
+(39, 'Manager', '3'),
+(40, 'Scrutinizing vouchers', '3'),
+(41, 'Customer visits', '3'),
+(42, 'Office meeting', '3'),
+(43, 'Customer Inquiry', '3'),
+(44, 'Customer calls', '3'),
+(45, 'Internal mail ', '3'),
+(46, 'Monthly audit cheque', '3'),
+(47, 'Update key registers', '3'),
+(48, 'Tally all registers', '3'),
+(49, 'Checking generator', '3'),
+(50, 'Hourse keeping', '3'),
+(51, 'T24', '3'),
+(52, 'SMS system', '3'),
+(53, 'iCard Old', '3'),
+(54, 'iCard New', '3'),
+(55, 'HCM', '3'),
+(56, 'CITS (Inward cheques)', '3'),
+(57, 'OMNI', '3'),
+(58, 'PMS', '3'),
+(59, 'Western Union', '3'),
+(60, 'Other', '3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `logging`
+--
+
+CREATE TABLE IF NOT EXISTS `logging` (
+  `logID` int(11) NOT NULL AUTO_INCREMENT,
+  `NIC` varchar(12) NOT NULL,
+  `S_date` date NOT NULL,
+  `S_time` time NOT NULL,
+  `E_date` date NOT NULL,
+  `E_time` time NOT NULL,
+  PRIMARY KEY (`logID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=61 ;
+
+--
+-- Dumping data for table `logging`
+--
+
+INSERT INTO `logging` (`logID`, `NIC`, `S_date`, `S_time`, `E_date`, `E_time`) VALUES
+(60, '789', '2020-11-08', '04:51:09', '0000-00-00', '00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `obuser`
+--
+
+CREATE TABLE IF NOT EXISTS `obuser` (
+  `nic` varchar(14) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `pw` varchar(20) NOT NULL,
+  `cat` int(11) NOT NULL,
+  PRIMARY KEY (`nic`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `obuser`
+--
+
+INSERT INTO `obuser` (`nic`, `name`, `pw`, `cat`) VALUES
+('782992350v', 'hemal', 'admin', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ob_log`
+--
+
+CREATE TABLE IF NOT EXISTS `ob_log` (
+  `nic` varchar(14) NOT NULL,
+  `date` date NOT NULL,
+  `time` time NOT NULL,
+  `bid` int(11) NOT NULL,
+  PRIMARY KEY (`nic`,`date`,`time`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ob_track`
+--
+
+CREATE TABLE IF NOT EXISTS `ob_track` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `start_time` time NOT NULL,
+  `banker_nic` varchar(14) NOT NULL,
+  `task_id` int(11) NOT NULL,
+  `end_time` time NOT NULL,
+  `reason_id` int(11) NOT NULL,
+  `ob_nic` varchar(14) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `ob_track`
+--
+
+INSERT INTO `ob_track` (`id`, `date`, `start_time`, `banker_nic`, `task_id`, `end_time`, `reason_id`, `ob_nic`) VALUES
+(1, '2020-11-08', '07:32:20', '789', 11, '00:00:00', 0, '782992350v'),
+(2, '2020-11-08', '10:34:17', '782992350v', 18, '10:49:22', 1, '782992350v'),
+(3, '2020-11-08', '10:34:48', '782992359v', 19, '00:00:00', 0, '782992350v');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reason`
+--
+
+CREATE TABLE IF NOT EXISTS `reason` (
+  `RID` int(11) NOT NULL AUTO_INCREMENT,
+  `REASON` varchar(35) NOT NULL,
+  PRIMARY KEY (`RID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `reason`
+--
+
+INSERT INTO `reason` (`RID`, `REASON`) VALUES
+(1, 'Other Priority job started'),
+(2, 'Job Complete');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `task`
+--
+
+CREATE TABLE IF NOT EXISTS `task` (
+  `TID` int(11) NOT NULL AUTO_INCREMENT,
+  `NIC` varchar(12) NOT NULL,
+  `JOBID` int(11) NOT NULL,
+  `JSDATE` date NOT NULL,
+  `JSTIME` time NOT NULL,
+  `JEDATE` date NOT NULL,
+  `JETIME` time NOT NULL,
+  `RID` int(11) NOT NULL,
+  PRIMARY KEY (`TID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `NIC` varchar(12) NOT NULL,
+  `fname` varchar(15) NOT NULL,
+  `lname` varchar(15) NOT NULL,
+  `pw` varchar(10) NOT NULL,
+  `BID` varchar(10) NOT NULL,
+  `cat` int(11) NOT NULL,
+  PRIMARY KEY (`NIC`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`NIC`, `fname`, `lname`, `pw`, `BID`, `cat`) VALUES
+('123', 'saman', 'kumara', '123', '302', 0),
+('456', 'Hemal', 'Kaviraj', '123', '303', 0),
+('789', 'lahiru', 'chamara', '123', '350', 0);
